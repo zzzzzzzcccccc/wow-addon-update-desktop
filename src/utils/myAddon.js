@@ -1,4 +1,4 @@
-import {INSTALL_ADDONS, WOW_ADDONS_FILE_PATH_KEY} from "../../conf";
+import {INSTALL_ADDONS, WOW_ADDONS_FILE_PATH_KEY} from "../conf/index";
 
 const { fs, rimraf } = window;
 

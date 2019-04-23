@@ -3,7 +3,7 @@ import AddonItem from '../AddonItem/AddonItem'
 import { List } from 'antd'
 import { ScrollViewFooter } from '../../../components';
 import './index.less'
-import myAddon from '../../utils/myAddon'
+import myAddon from '../../../utils/myAddon'
 
 class MyAddonDrawerInfo extends React.Component {
   constructor(props) {

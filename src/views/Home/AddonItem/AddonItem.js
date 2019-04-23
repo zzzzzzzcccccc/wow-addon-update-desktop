@@ -5,7 +5,7 @@ import moment from 'moment'
 import './index.less'
 import {INSTALL_ADDONS, TIME_OUT_KEY, WOW_ADDONS_FILE_PATH_KEY} from "../../../conf";
 import helper from '../../../helper/index'
-import myAddon from '../../utils/myAddon'
+import myAddon from '../../../utils/myAddon'
 
 const {fs, request, AdmZip, rimraf} = window;
 const DEFAULT_BTN_TXT = '安装';

@@ -5,7 +5,7 @@ import { List } from 'antd'
 import AddonItem from './AddonItem/AddonItem'
 import { ScrollViewFooter } from '../../components'
 import {TIME_OUT_KEY} from "../../conf";
-import myAddon from '../utils/myAddon'
+import myAddon from '../../utils/myAddon'
 
 @inject('store')
 @observer

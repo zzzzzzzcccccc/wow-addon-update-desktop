@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import '../../assets/style/common/item.less'
-import { Tabs, Spin, Drawer, Upload, Icon } from 'antd'
+import { Tabs, Spin, Drawer, Upload, Icon, Button } from 'antd'
 import TabItem from './TabItem'
 import {debounce} from "../../utils";
 import './index.less'
@@ -85,15 +85,11 @@ class Home extends React.Component {
                 width="400px"
                 destroyOnClose
                 title="设置wow插件目录">
-          <Upload.Dragger customRequest={this.getInstallFilePath} fileList={false} webkitdirectory directory>
-            <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
-            </p>
-            <p className="ant-upload-text">点击或拖拽你的wow插件根目录地址</p>
-          </Upload.Dragger>
-          {localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY) ? <p>{localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY)}</p> : null}
+          <Upload customRequest={this.getInstallFilePath} fileList={false} webkitdirectory directory>
+            <Button type="primary">wow插件根目录地址(如AddOns)</Button>
+          </Upload>
+          {localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY) ? <p><span>当前目录:</span>{localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY)}</p> : null}
         </Drawer>
-
 
         <Drawer visible={myAddonDrawerVisible}
                 placement="left"
