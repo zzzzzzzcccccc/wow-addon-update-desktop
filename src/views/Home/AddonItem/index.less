@@ -1,0 +1,45 @@
+.addon-item-wrapper{
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &-thumb{
+    display: block;
+    max-height: 68px;
+    max-width: 68px;
+  }
+  &-label{
+    flex: 1;
+    padding-left: 20px;
+    overflow: hidden;
+    &-header{
+      font-size: 18px;
+      font-weight: 700;
+    }
+    &-total{
+      font-size: 14px;
+      margin: 6px auto;
+      display: flex;
+      align-items: center;
+      color: #666;
+    }
+    &-txt{
+      font-size: 14px;
+      color: #999;
+      cursor: pointer;
+    }
+  }
+  &-actions{
+    width: 200px;
+  }
+  &:hover{
+    background-color: rgba(105, 73, 186, 0.8);
+    .addon-item-wrapper-label{
+      &-header,&-total,&-txt{
+        color: #fff;
+      }
+    }
+  }
+}

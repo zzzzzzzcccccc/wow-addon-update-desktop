@@ -1,0 +1,164 @@
+html, body, #root{
+  width: 100%;
+  height: 100%;
+}
+body{
+  background-color: #f5f5f9;
+}
+#root{
+  overflow-x: hidden;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /*火狐*/
+  /*关闭横屏自动调整文字大小的功能*/
+}
+body,
+div,
+span,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+input,
+textarea,
+p,
+th,
+td,
+hr,
+button,
+i,
+article,
+aside,
+footer,
+header,
+menu,
+nav,
+section,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: #333;
+}
+body,
+button,
+input,
+select,
+textarea {
+  outline: none;
+  /*元素聚焦时，焦点框为0.*/
+}
+input,
+textarea {
+  border: none;
+  resize: none;
+  /*禁止文本框拉伸*/
+  -webkit-appearance: none;
+  /*组件默认的样式空*/
+  /*特殊的属性定义  清除浏览器给input自带的样式*/
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th {
+  text-align: inherit;
+  /*继承*/
+}
+img {
+  border: 0;
+  content: normal !important;
+}
+caption,
+em,
+th {
+  font-style: normal;
+  font-weight: 500;
+}
+caption,
+th {
+  text-align: left;
+}
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+  color: #4C494A;
+}
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+i {
+  font-style: normal;
+}
+.clearfix::after,
+.clearfix::before {
+  content: ".";
+  line-height: 0;
+  height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.none {
+  display: none !important;
+}
+.block {
+  display: block !important;
+}
+.p_top{
+  top: 0;
+}
+.p_left{
+  left: 0;
+}
+.p_right{
+  right: 0;
+}
+.p_bottom{
+  bottom: 0;
+}
+.w100{
+  width: 100%;
+}
+.h100{
+  height: 100%;
+}
+.text-over{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.tl{
+  text-align: left;
+}
+.tr{
+  text-align: right;
+}
