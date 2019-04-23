@@ -1,9 +1,9 @@
 {
-  "name": "wow-addon-update-desktop",
+  "name": "wow-addons-update-desktop",
   "version": "0.1.0",
   "private": false,
   "main": "main.js",
-  "home": ".",
+  "homepage": "./",
   "dependencies": {
     "adm-zip": "^0.4.13",
     "antd": "^3.16.5",
@@ -27,8 +27,8 @@
     "test": "react-app-rewired test",
     "electron-start": "electron . --env dev",
     "electron-build": "npm run build && electron . --env build",
-    "packageDarwin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=darwin --arch=x64 --out=./dist --app-version=1.0.0",
-    "packageWin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=win32 --arch=x64 --out=./dist --app-version=1.0.0"
+    "packageDarwin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=darwin --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.0",
+    "packageWin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=win32 --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.0 --overwrite"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,6 +50,7 @@
     "customize-cra": "^0.2.12",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "react-app-rewired": "^2.1.1"
+    "react-app-rewired": "^2.1.1",
+    "electron": "^4.1.4"
   }
 }
