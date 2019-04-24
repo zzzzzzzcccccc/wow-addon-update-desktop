@@ -4,12 +4,12 @@
 
 #### 应用下载
 
-* 1.0.1 [win7/win10下载地址](https://pan.baidu.com/s/1GkRcJi6Gipj3hAy3m8YICA) 提取码vbxv [mac](https://pan.baidu.com/s/1aEP7zVTw5THZAj0RIRZlUQ) 提取码d7ff
+* 1.0.1 [win7/win10](https://pan.baidu.com/s/1GkRcJi6Gipj3hAy3m8YICA) 提取码vbxv [mac](https://pan.baidu.com/s/1aEP7zVTw5THZAj0RIRZlUQ) 提取码d7ff
  1. 修复首页爬取curse数据超时，下载插件超时强制你更新客户端的问题，支持了重试
  2. 现在可以修改你的wow插件根目录，如果设置错了可以点击底部按钮的设置重新设置你的插件根目录地址
  3. 新增插件搜索功能，保存历史搜索记录方便下次查找
 
-* 1.0.0 [win7/win10下载地址](https://pan.baidu.com/s/1l7Hl6oz6jVd4grA3xsnJHQ) 提取码k27j [mac](https://pan.baidu.com/s/1zEcwqrxXmaveK6tuEd3q_Q) 提取码qars
+* 1.0.0 [win7/win10](https://pan.baidu.com/s/1l7Hl6oz6jVd4grA3xsnJHQ) 提取码k27j [mac](https://pan.baidu.com/s/1zEcwqrxXmaveK6tuEd3q_Q) 提取码qars
 
 ##### 使用说明
 
