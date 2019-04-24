@@ -10,6 +10,7 @@ import {WOW_ADDONS_FILE_PATH_KEY} from "../../conf";
 import helper from "../../helper";
 import { FloatButton } from '../../components'
 import MyAddonDrawerInfo from './MyAddonDrawerInfo/MyAddonDrawerInfo'
+import SearchAddonDrawerInfo from './SearchAddonDrawerInfo/SearchAddonDrawerInfo'
 
 const TabPane = Tabs.TabPane;
 const TAB_HEIGHT = 46 + 16; // tab标题高低46 下边距 16
@@ -53,12 +54,22 @@ class Home extends React.Component {
   };
 
   render() {
-    const { loading, appDrawerVisible, setAppDrawerVisible, myAddonDrawerVisible, setMyAddonDrawerVisible } = this.props.store;
+    const { loading, appDrawerVisible, setAppDrawerVisible, myAddonDrawerVisible, setMyAddonDrawerVisible, searchDrawerVisible, setSearchDrawerVisible } = this.props.store;
     const { tabHeight, currentIndex } = this.state;
     return(
       <div className="root-wrapper home-wrapper">
         <FloatButton btnList={[
-          {comp: <Icon type="file-protect" onClick={() => setMyAddonDrawerVisible(true)} />, title: '我的插件'}
+          {comp: <Icon type="file-protect" onClick={() => {
+              const installFilePath = localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY);
+              if (!installFilePath) {
+                helper.W(`请先选择wow插件根目录地址`);
+                setAppDrawerVisible(true);
+                return;
+              }
+              setMyAddonDrawerVisible(true);
+            }} />, title: '我的插件'},
+          {comp: <Icon type="radius-setting" onClick={() => setAppDrawerVisible(true)} />, title: '设置'},
+          {comp: <Icon type="search" onClick={() => setSearchDrawerVisible(true)} />, title: '插件搜索'}
           ]} />
 
         <section className="home-wrapper-container">
@@ -82,13 +93,12 @@ class Home extends React.Component {
 
         <Drawer visible={appDrawerVisible}
                 onClose={() => setAppDrawerVisible(false)}
-                width="400px"
+                width="100%"
                 destroyOnClose
-                title="设置wow插件目录">
+                title="设置">
           <Upload customRequest={this.getInstallFilePath} fileList={false} webkitdirectory directory>
-            <Button type="primary">wow插件根目录地址(如AddOns)</Button>
+            <Button type="primary">{localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY) ? `当前目录:${localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY)}` : 'wow插件根目录地址(如:/a/b/Interface/AddOns)'}</Button>
           </Upload>
-          {localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY) ? <p><span>当前目录:</span>{localStorage.getItem(WOW_ADDONS_FILE_PATH_KEY)}</p> : null}
         </Drawer>
 
         <Drawer visible={myAddonDrawerVisible}
@@ -96,7 +106,20 @@ class Home extends React.Component {
                 width="100%"
                 title="我的插件"
                 onClose={() => setMyAddonDrawerVisible(false)}>
-          <MyAddonDrawerInfo ref={el => this.myAddonDrawerInfo = el} onDelete={() => this.tabItem.wrappedInstance.setCacheAddonList()} />
+          <MyAddonDrawerInfo ref={el => this.myAddonDrawerInfo = el} onDelete={() => {
+            this.tabItem.wrappedInstance.setCacheAddonList();
+            if (this.searchAddonDrawerInfo && this.searchAddonDrawerInfo.wrappedInstance) {
+              this.searchAddonDrawerInfo.wrappedInstance.setCacheAddonList();
+            }
+          }} />
+        </Drawer>
+
+        <Drawer  placement="right"
+                 width="100%"
+                 visible={searchDrawerVisible}
+                 onClose={() => setSearchDrawerVisible(false)}
+                 title="搜索">
+          <SearchAddonDrawerInfo myAddonDrawerInfo={this.myAddonDrawerInfo} ref={el => this.searchAddonDrawerInfo = el} />
         </Drawer>
       </div>
     )

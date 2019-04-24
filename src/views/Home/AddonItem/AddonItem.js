@@ -13,6 +13,7 @@ const GET_LOAD_BTN_TXT = '获取下载地址...';
 const LOAD_BTN_TXT = '下载中...';
 const INSTALL_BTN_TXT = '安装中...';
 const SUCCESS_BTN_TXT = '成功';
+const TIME_OUT_BTN_TXT = '获取超时重试';
 const IconItem = ({ type, txt }) => (
   <div>
     <Icon type={type} />
@@ -64,7 +65,7 @@ class AddonItem extends React.Component {
     }
 
     if (downloadUrl === TIME_OUT_KEY) { // 请求超时
-      this.setState({ loading: false, btnTxt: DEFAULT_BTN_TXT });
+      this.setState({ loading: false, btnTxt: TIME_OUT_BTN_TXT });
     } else {
       this.download(downloadUrl, installFilePath, rowData);
     }

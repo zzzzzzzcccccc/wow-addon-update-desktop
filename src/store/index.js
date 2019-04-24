@@ -23,10 +23,10 @@ const reloadNotice = (message, description) => {
     key,
     btn: (
       <Button type="primary" size="small" onClick={() => reloadAction()}>
-        Confirm
+        重新加载
       </Button>
     ),
-    onClose: () => reloadAction(),
+    onClose: notification.close(key),
     duration: null
   })
 };
@@ -41,6 +41,9 @@ class Store {
   @observable
   myAddonDrawerVisible = false;
 
+  @observable
+  searchDrawerVisible = false;
+
   @action
   setLoading = data => this.loading = data || false;
 
@@ -49,6 +52,9 @@ class Store {
 
   @action
   setMyAddonDrawerVisible = data => this.myAddonDrawerVisible = data || false;
+
+  @action
+  setSearchDrawerVisible = data => this.searchDrawerVisible = data || false;
 
   @action
   getAddonsList = (path, page) => {
@@ -83,7 +89,6 @@ class Store {
       let timer = setTimeout(() => {
         electron.ipcRenderer.removeListener(`${rowData.path}-getDownAddonUrl`, () => {});
         reject(TIME_OUT_KEY);
-        reloadNotice('获取插件下载地址失败', '重新获取curse插件列表')
       }, AJAX_TIME_OUT);
 
       electron.ipcRenderer.send('downAddon', rowData, installFilePath);
@@ -91,13 +96,38 @@ class Store {
         if (data) {
           resolve(data);
         } else {
-          electron.ipcRenderer.removeListener(`${rowData.path}-getDownAddonUrl`, () => {});
           reject();
         }
+        electron.ipcRenderer.removeListener(`${rowData.path}-getDownAddonUrl`, () => {});
         clearTimeout(timer);
       });
     })
   };
+
+  @action
+  searchAddons = (keyword, page=1) => {
+    if (!keyword) {
+      return;
+    }
+
+    return new Promise((resolve, reject) => {
+      let timer = setTimeout(() => {
+        electron.ipcRenderer.removeListener(`getSearchAddons`, () => {});
+        reject(TIME_OUT_KEY);
+      }, AJAX_TIME_OUT);
+
+      electron.ipcRenderer.send('searchAddons', keyword, page);
+      electron.ipcRenderer.on('getSearchAddons', (e, data) => {
+        if (data) {
+          resolve(data)
+        } else {
+          reject([])
+        }
+        clearTimeout(timer);
+        electron.ipcRenderer.removeListener(`getSearchAddons`, () => {});
+      })
+    })
+  }
 }
 
 export default new Store();

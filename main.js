@@ -24,6 +24,7 @@ function createWindow(width=1200, height=660) {
 function createController () {
   ipcMain.on('baseAddons', require('./electron-main/controller/BaseAddons')); // 插件列表
   ipcMain.on(`downAddon`, require('./electron-main/controller/DownAddons')); // 下载并且解压插件到指定目录
+  ipcMain.on(`searchAddons`, require('./electron-main/controller/SearchAddons')); // 插件搜索
   ipcMain.on('reloadWindow', () => {
     if (!mainWindow) {
       return;
