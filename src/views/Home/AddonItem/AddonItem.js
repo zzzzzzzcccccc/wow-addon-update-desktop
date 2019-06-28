@@ -41,7 +41,6 @@ class AddonItem extends React.Component {
   }
 
   handleDownAddon = async (rowData) => {
-    console.log(rowData);
     if (!rowData || !rowData.path) {
       return;
     }
@@ -72,13 +71,13 @@ class AddonItem extends React.Component {
   };
 
   download = (downloadUrl, installFilePath, rowData) => { // 下载
+    this.setState({ btnTxt: LOAD_BTN_TXT });
     let file = `${installFilePath}/${rowData.label}_${Date.now()}.zip`;
     let writeStream = fs.createWriteStream(file);
     request.get(downloadUrl).pipe(writeStream);
     // 开始下载
     writeStream.on('drain',  () => {
-      // console.log(`${rowData.label}: ${writeStream.bytesWritten}`);
-      this.setState({ btnTxt: LOAD_BTN_TXT })
+      // console.log(`${rowData.label}start: ${writeStream.bytesWritten}`);
     });
     // 下载成功
     writeStream.on('finish',  () => {
@@ -198,7 +197,7 @@ class AddonItem extends React.Component {
           <div className="addon-item-wrapper-label">
             <header className="addon-item-wrapper-label-header">{label}</header>
             <section className="addon-item-wrapper-label-total">
-              <IconItem type="download" txt={`${downloadCount}次下载`} />
+              <IconItem type="download" txt={`${downloadCount}`} />
               <Divider type="vertical" />
               <IconItem type="reload" txt={`${isNaN(updateTimeStamp * 1000) ? '' : moment(new Date(updateTimeStamp * 1000)).fromNow()}更新`} />
               <Divider type="vertical" />

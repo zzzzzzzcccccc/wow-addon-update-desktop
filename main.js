@@ -25,6 +25,7 @@ function createController () {
   ipcMain.on('baseAddons', require('./electron-main/controller/BaseAddons')); // 插件列表
   ipcMain.on(`downAddon`, require('./electron-main/controller/DownAddons')); // 下载并且解压插件到指定目录
   ipcMain.on(`searchAddons`, require('./electron-main/controller/SearchAddons')); // 插件搜索
+  // ipcMain.on('addonDetail', require('./electron-main/controller/AddonDetail')); // 插件详情
   ipcMain.on('reloadWindow', () => {
     if (!mainWindow) {
       return;
@@ -46,7 +47,7 @@ app.on('ready', () => {
   createController();
 
   if (argv && argv[1] === 'dev') {
-    mainWindow.loadURL(`http://localhost:3000`);
+    mainWindow.loadURL(`http://localhost:3001`);
     mainWindow.webContents.openDevTools();
     globalShortcut.register('f5', function() {
       mainWindow.reload();

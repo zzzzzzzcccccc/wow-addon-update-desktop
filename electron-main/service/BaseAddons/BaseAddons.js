@@ -18,12 +18,10 @@ const service = (path, page, callback) => {
       return
     }
     const $ = cheerio.load(res.text);
-    // console.log('已访问到curese页面', addonsBaseUrl);
     const addonsList = findAddonsList($);
     const maxPage = findAddonsMaxPageNum($);
     const size = 20;
     callback({
-      // menuList: findMenuList($),
       addonsList,
       page: parseInt(page),
       size,
@@ -60,38 +58,35 @@ const findMenuList = ($) => {
 const findAddonsList = ($) => {
   const list = [];
 
-  $('#content > section > div > main > section > section > div > div.listing-body > ul > li.project-list-item').each((i, el) => {
-    let leftDom = $(el).find('div > div.list-item__avatar > a.avatar__container');
-    let centerDom = $(el).find('div > div.list-item__details');
-    list.push({
-      thumb: leftDom.find('figure > img.aspect__fill').attr('src') || '',
-      path: leftDom.attr('href') || '',
-      lastPath: leftDom.attr('href').split('/')[leftDom.attr('href').split('/').length - 1] || '',
-      label: centerDom.find('a > h2.list-item__title').text().replace(/[ \r\n]/g,"") || '',
-      downloadCount: centerDom.find('p.list-item__stats > span.count--download').text() || '',
-      updateTime: centerDom.find('p.list-item__stats > span.date--updated > abbr').attr('title') || '',
-      updateTimeStamp: centerDom.find('p.list-item__stats > span.date--updated > abbr').attr('data-epoch') || '',
-      createTimeStamp: centerDom.find('p.list-item__stats > span.date--created > abbr').attr('data-epoch') || '',
-      description: centerDom.find('div.list-item__description > p').attr('title') || ''
-    })
-  });
+  $('body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div.container > section > div.px-2.flex-1 > div > div:nth-child(3) > div > div.my-2')
+    .each((i, el) => {
+      let dom = $(el).find('div.project-listing-row');
+      list.push({
+        thumb: dom.find('div:nth-child(1) > div:nth-child(1) > div.project-avatar > a > img').attr('src') || '',
+        path: dom.find('div:nth-child(1) > div:nth-child(1) > div.project-avatar > a').attr('href') || '',
+        label: dom.find('div:nth-child(2) > div:nth-child(1) > a:nth-child(1) > h3').text() || '',
+        downloadCount: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(1)').text() || '',
+        updateTimeStamp: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(2) > abbr').attr('data-epoch') || 0,
+        createTimeStamp: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(3) > abbr').attr('data-epoch') || 0,
+        description: dom.find('div:nth-child(2) > p').text() || ''
+      })
+    });
 
   return list;
 };
 
 // 获取curse的最大页码
 const findAddonsMaxPageNum = ($) => {
-  const lastDom = $('#content > section > div > main > section > section > div > div.listing-header > div.b-pagination > ul.b-pagination-list');
-  const text = lastDom.find('li.b-pagination-item:last-child > a').text();
-  if (!text) {
-    return 1
-  }
-  if (text === 'Next') {
-    const prevDomText =  lastDom.find('li.b-pagination-item:nth-last-child(2) > a').text() || '';
-    return prevDomText ? (isNaN(prevDomText * 1) ? 1 : prevDomText * 1) : 1;
-  } else {
-    return text ? (isNaN(text * 1) ? 1 : text * 1) : 1;
-  }
+  const lastDom = $('body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div > section > div.px-2.flex-1 > div > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > div.pagination');
+  const arr = [];
+  lastDom.find('span').each((i, el) => {
+    let val = $(el).text();
+    if (!isNaN(val)) {
+      arr.push(parseInt(val))
+    }
+  });
+
+  return arr[arr.length - 1]
 };
 
 module.exports = service;

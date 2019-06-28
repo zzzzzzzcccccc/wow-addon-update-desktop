@@ -30,7 +30,7 @@ const service = (e, rowData, callback) => {
   });
 };
 const getDownloadUrl = ($) => {
-  const dom = $('#content > section.primary-content > div.download-container > main.download__body > div.download__container > div > p:nth-child(2) > a.download__link');
+  const dom = $('body > div.flex.flex-col.min-h-full.min-h-screen > main > div.container > div > div:nth-child(2) > div > div:nth-child(1) > p:nth-child(2) > a');
 
   return dom.attr('href') || ''
 };

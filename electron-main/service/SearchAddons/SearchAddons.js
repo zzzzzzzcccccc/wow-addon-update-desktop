@@ -20,19 +20,15 @@ const service = (keyword, page, callback) => {
       return;
     }
     const $ = cheerio.load(res.text);
-    const total = getSearchCount($) ? getSearchCount($) : 0;
+    const list = getAddonList($);
     const pageSize = 20;
-    callback({total: total ? (isNaN(total * 1) ? 0 : total * 1) : 0, page, list: total ? getAddonList($) || [] : [], pageSize})
+    callback({
+      total: list.length,
+      page,
+      pageSize,
+      list
+    })
   })
-};
-
-/*
-* 获取查询总数
-* */
-const getSearchCount = ($) => {
-  const dom = $('#content > section.primary-content > div.search-container > div.tabbed-container > div.scroll-container > div.scrolled-content > div.j-tab-search > ul > li > a');
-
-  return dom.text() ? dom.text().replace(/[^0-9]+/g, '') : 0
 };
 
 /*
@@ -40,21 +36,18 @@ const getSearchCount = ($) => {
 * */
 const getAddonList = ($) => {
   const list = [];
-  const dom = $(`#tab-addons > div.listing-container > div.listing-body > ul > li.project-list-item`);
+  const dom = $(`body > div.flex.flex-col.min-h-full.min-h-screen > main > div.container.mx-auto.mt-6.flex.flex-col.flex-1 > div:nth-child(4) > ul > div > div.my-2`);
 
   dom.each((i, el) => {
-    let leftDom = $(el).find('div > div.list-item__avatar > a.avatar__container');
-    let centerDom = $(el).find('div > div.list-item__details');
+    let dom = $(el).find('div.project-listing-row');
     list.push({
-      thumb: leftDom.find('figure > img.aspect__fill').attr('src') || '',
-      path: leftDom.attr('href') || '',
-      lastPath: leftDom.attr('href').split('/')[leftDom.attr('href').split('/').length - 1] || '',
-      label: centerDom.find('a > h2.list-item__title').text().replace(/[ \r\n]/g,"") || '',
-      downloadCount: centerDom.find('p.list-item__stats > span.count--download').text() || '',
-      updateTime: centerDom.find('p.list-item__stats > span.date--updated > abbr').attr('title') || '',
-      updateTimeStamp: centerDom.find('p.list-item__stats > span.date--updated > abbr').attr('data-epoch') || '',
-      createTimeStamp: centerDom.find('p.list-item__stats > span.date--created > abbr').attr('data-epoch') || '',
-      description: centerDom.find('div.list-item__description > p').attr('title') || ''
+      thumb: dom.find('div:nth-child(1) > div:nth-child(1) > div.project-avatar > a > img').attr('src') || '',
+      path: dom.find('div:nth-child(1) > div:nth-child(1) > div.project-avatar > a').attr('href') || '',
+      label: dom.find('div:nth-child(2) > div:nth-child(1) > a:nth-child(1) > h3').text() || '',
+      downloadCount: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(1)').text() || '',
+      updateTimeStamp: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(2) > abbr').attr('data-epoch') || 0,
+      createTimeStamp: dom.find('div:nth-child(2) > div:nth-child(2) > span:nth-child(3) > abbr').attr('data-epoch') || 0,
+      description: dom.find('div:nth-child(2) > p').text() || ''
     })
   });
 
