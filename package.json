@@ -1,6 +1,6 @@
 {
   "name": "wow-addons-update-desktop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "main": "main.js",
   "homepage": "./",
@@ -27,8 +27,8 @@
     "test": "react-app-rewired test",
     "electron-start": "electron . --env dev",
     "electron-build": "npm run build && electron . --env build",
-    "packageDarwin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=darwin --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.1",
-    "packageWin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=win32 --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.1 --overwrite"
+    "packageDarwin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=darwin --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.2",
+    "packageWin": "npm run build && electron-packager . 魔兽单体插件更新工具 --platform=win32 --arch=x64 --asar  --overwrite --out=./dist --app-version=1.0.2 --overwrite"
   },
   "eslintConfig": {
     "extends": "react-app"
