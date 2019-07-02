@@ -4,7 +4,7 @@
 
 #### 应用下载
 
-* 1.0.2 [mac](https://pan.baidu.com/s/1QdQZ_VzPAQA_fH0xlbKv1Q) 提取码 6fhi
+* 1.0.2 [win7/win10](https://pan.baidu.com/share/init?surl=-853kn4CgSJg1xPSNjD2qA) 提取码ffuq [mac](https://pan.baidu.com/s/1QdQZ_VzPAQA_fH0xlbKv1Q) 提取码 6fhi
  1. 修复curse ui 更新导致爬虫失效的问题
  2. 由于curse搜索页面获取不到页码暂时只支持搜索前20个插件了
 
