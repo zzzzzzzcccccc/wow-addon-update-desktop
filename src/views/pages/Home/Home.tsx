@@ -42,12 +42,13 @@ class Home extends React.Component<HomeProps, HomeState> {
   };
 
   getInstallFilePath = (e:any): void => {
-    const { setOptionDrawerVisible } = this.props.store!;
+    const { setOptionDrawerVisible, setMyAddonList } = this.props.store!;
     const { file } = e;
     if (file && file.path) {
       localStorage.setItem(WOW_ADDONS_FILE_PATH_KEY, file.path);
       message.success('设置wow根目录插件成功');
       setOptionDrawerVisible(false);
+      setMyAddonList(myAddon.getAddonList())
     }
   };
 
