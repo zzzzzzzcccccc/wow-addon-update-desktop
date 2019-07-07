@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/build_node_modules
 /.pnp
 .pnp.js
 package-lock.json
@@ -12,7 +11,6 @@ package-lock.json
 
 # production
 /build
-/dist
 
 # misc
 .idea

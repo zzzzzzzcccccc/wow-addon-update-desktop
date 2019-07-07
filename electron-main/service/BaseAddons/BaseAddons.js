@@ -5,10 +5,10 @@ const cheerio = require('cheerio');
 require('superagent-charset')(request);
 
 /**
-* @params {string}   menu
-* @params {number}   path
-* @return {function} callback
-* */
+ * @params {string}   menu
+ * @params {number}   path
+ * @return {function} callback
+ * */
 const service = (path, page, callback) => {
   const addonsBaseUrl = `${config.addonsBaseUrl}${path}?page=${page}`;
 
@@ -21,6 +21,7 @@ const service = (path, page, callback) => {
     const addonsList = findAddonsList($);
     const maxPage = findAddonsMaxPageNum($);
     const size = 20;
+
     callback({
       addonsList,
       page: parseInt(page),

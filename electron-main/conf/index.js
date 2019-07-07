@@ -1,3 +1,3 @@
 module.exports = {
-  addonsBaseUrl: `https://www.curseforge.com`
+  addonsBaseUrl: 'https://www.curseforge.com'
 };

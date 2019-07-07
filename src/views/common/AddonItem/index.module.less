@@ -1,0 +1,64 @@
+.section{
+  width: 100%;
+  position: relative;
+  &:after{
+    content: '';
+    background-color: #ddd;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    display: block;
+    height: 1px;
+    transform: scaleY(0.5);
+  }
+}
+
+.itemWrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #fff;
+}
+
+.thumbImg{
+  display: block;
+  max-width: 68px;
+  max-height: 68px;
+}
+
+.itemLabel{
+  flex: 1;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title{
+  font-weight: bolder;
+  color: #000;
+  font-size: 18px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+.label{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  padding: 6px 0;
+  font-size: 14px;
+}
+.desc{
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-bottom: 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 14px;
+  color: #666;
+}
+
+.actions{
+}

@@ -1,0 +1,48 @@
+.searchAddonWrapper{
+  position: absolute;
+  left: 0;
+  top: 55px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(245, 245, 249);
+}
+
+.searchAddonWrapperInfo{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.searchInfo{
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+  &:after{
+    content: '';
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #ddd;
+    transform: scaleY(0.5);
+    display: block;
+  }
+}
+
+.listWrapper{
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.spinWrapper{
+  text-align: center;
+  padding: 15px 0;
+}
+
+.cacheWrapper{
+  width: 100%;
+  padding: 12px 15px;
+  text-align: center;
+  position: fixed;
+}

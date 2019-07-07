@@ -4,11 +4,10 @@ const cheerio = require('cheerio');
 
 require('superagent-charset')(request);
 
-/*
+/**
 * @param  {object}   e                 主进程的event
-* @param  {string}   path              需要下载的插件
-* @param  {string}   installFilePath   接下并安装地址
-* @return            callback
+* @param  {string}   rowData              需要下载的插件
+* @param  {function} callback
 * */
 const service = (e, rowData, callback) => {
   const downloadUrl = `${config.addonsBaseUrl}${rowData.path}/download`;

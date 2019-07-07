@@ -4,6 +4,11 @@
 
 #### 应用下载
 
+* 1.0.3
+ 1.使用typescript重构客户端代码，优化了非常多体验性问题
+ 2.优化了各种加载失败导致需要重试问题，现在增加体验重试都不会完全重启客户端了
+ 3.后期会实现打开应用列出当前需要更新的插件,以及更新客户端皮肤的风格
+
 * 1.0.2 [win7/win10](https://pan.baidu.com/share/init?surl=-853kn4CgSJg1xPSNjD2qA) 提取码ffuq [mac](https://pan.baidu.com/s/1QdQZ_VzPAQA_fH0xlbKv1Q) 提取码 6fhi
  1. 修复curse ui 更新导致爬虫失效的问题
  2. 由于curse搜索页面获取不到页码暂时只支持搜索前20个插件了

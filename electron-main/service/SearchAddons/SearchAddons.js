@@ -4,11 +4,10 @@ const cheerio = require('cheerio');
 
 require('superagent-charset')(request);
 
-/*
-* @param  {object}   e                 主进程的event
+/**
 * @param  {string}   keyword           搜索的关键词
 * @param  {number}   page              页码
-* @return            callback
+* @param  {function} callback
 * */
 const service = (keyword, page, callback) => {
   const searchUrl = `${config.addonsBaseUrl}/wow/addons/search?search=${keyword}&wow-addons-page=${page}`;
