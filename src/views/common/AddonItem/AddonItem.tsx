@@ -24,8 +24,7 @@ const rimraf = window['rimraf'];
 @observer
 class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
   static defaultProps = {
-    rowData: null,
-    renderSource: 'list'
+    rowData: null
   };
 
   constructor(props:AddonItemProps) {
@@ -112,7 +111,7 @@ class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
 
   handleInstallDown = (folderList:Array<any>, rowData:any): void => {
     const fileJson = `${this.state.installFilePath}/${INSTALL_ADDONS}`;
-    const { setMyAddonList } = this.props.store!;
+    const { setMyAddonList, updateAddonList, setUpdateAddonList } = this.props.store!;
     if (!fs.existsSync(fileJson)) {
       fs.writeFileSync(fileJson, '[]')
     }
@@ -124,6 +123,11 @@ class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
     setMyAddonList(myAddon.getAddonList());
     // 删除zip包
     rimraf(this.state.zipFile, () => {});
+    // 若安装的插件在需要更新的列表里存在则删除掉
+    let cacheUpdateAddonList = JSON.parse(JSON.stringify(updateAddonList));
+    if (cacheUpdateAddonList.filter((v:any) => v.path === rowData.path).length !== 0) {
+      setUpdateAddonList(cacheUpdateAddonList.filter((v:any) => v.path !== rowData.path))
+    }
     this.setState({ btnTxt: SUCCESS_BTN_TXT, loading: false });
   };
 
@@ -135,7 +139,6 @@ class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
   };
 
   renderActions = (rowData: any): React.ReactNode => {
-    const { renderSource } = this.props;
     const { loading, btnTxt } = this.state;
     const myAddonList: Array<any> = JSON.parse(JSON.stringify(this.props.store!.myAddonList));
     const findArr: Array<any> =  myAddonList.filter((addon:any) => addon.path === rowData.path);
@@ -151,46 +154,42 @@ class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
       disabled = updateTimeStamp * 1 <= cacheUpdateTimeStamp * 1;
     }
 
-    switch (renderSource) {
-      case 'list':
-        return(
+    return(
+      <div className={styles.actions}>
+        {isInstall && disabled ?
+          <Button disabled size="small" type="primary" key={`${rowData.path}-install`}>已安装</Button> :
+          <Popconfirm onConfirm={() => this.handleDownAddon(rowData)} placement="left" title="确认执行吗?" key={`${rowData.path}-install`}>
+            <Button size="small" type="primary" loading={loading} disabled={disabled}>
+              {!loading ? (isInstall ? (disabled ? '已安装' : '有更新') : '安装') : btnTxt}
+            </Button>
+          </Popconfirm>
+        }
+        {!isInstall ? null :
           <Fragment>
-            {isInstall && disabled ?
-              <Button disabled size="small" type="primary" key={`${rowData.path}-install`}>已安装</Button> :
-              <Popconfirm onConfirm={() => this.handleDownAddon(rowData)} placement="left" title="确认执行吗?" key={`${rowData.path}-install`}>
-                <Button size="small" type="primary" loading={loading} disabled={disabled}>
-                  {!loading ? (isInstall ? (disabled ? '已安装' : '有更新') : '安装') : btnTxt}
-                </Button>
-              </Popconfirm>
-            }
-          </Fragment>
-        );
-      case 'my':
-        return(
-          <Fragment>
-            {loading ?
-              <Button size="small" type="primary" key={`${rowData.path}-installBtn`} loading={loading}>{btnTxt}</Button> :
-              <Popconfirm key={`${rowData.path}-installBtn`} title="确认执行吗" onConfirm={() => this.handleDownAddon(rowData)} placement="left">
-                <Button size="small" type="primary">更新</Button>
-              </Popconfirm>
-            }
             <Divider type="vertical" key={`${rowData.path}-line`} />
             <Popconfirm key={`${rowData.path}-deleteBtn`} onConfirm={() => this.deleteAddon(rowData)} title="确认执行吗" placement="left">
               <Button size="small" type="danger">删除</Button>
             </Popconfirm>
           </Fragment>
-        );
-      default:
-        return null
-    }
+        }
+      </div>
+    );
   };
 
   render() {
     const { rowData } = this.props;
+    let updateAddonList = JSON.parse(JSON.stringify(this.props.store!.updateAddonList));
     if (!rowData) {
       return null;
     }
-    const {thumb, label, description, downloadCount, createTimeStamp, updateTimeStamp} = rowData;
+    let nowRowData:any = JSON.parse(JSON.stringify(rowData));
+    const findUpdateAddonArr = updateAddonList.filter((v: any) => v.path === rowData.path);
+    if (findUpdateAddonArr.length !== 0) {
+      if (findUpdateAddonArr[0].updateTimeStamp) {
+        nowRowData.updateTimeStamp = findUpdateAddonArr[0].updateTimeStamp
+      }
+    }
+    const {thumb, label, description, downloadCount, createTimeStamp, updateTimeStamp} = nowRowData;
     return(
       <section className={styles.section}>
         <div className={styles.itemWrapper}>
@@ -207,7 +206,7 @@ class AddonItem extends React.Component<AddonItemProps, AddonItemState> {
             <p className={styles.desc} title={description}>{description}</p>
           </div>
           <div className={styles.actions}>
-            {this.renderActions(rowData)}
+            {this.renderActions(nowRowData)}
           </div>
         </div>
       </section>

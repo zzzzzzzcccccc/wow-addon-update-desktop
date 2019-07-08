@@ -52,9 +52,22 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
   };
 
+  checkUpdate = (): void => { // 检查更新
+    const cacheAddonList:Array<any> = myAddon.getAddonList();
+    const { setMyAddonList, checkUpdateMyAddon, setUpdateAddonList } = this.props.store!;
+
+    setMyAddonList(cacheAddonList);
+
+    checkUpdateMyAddon().then(data => {
+      setUpdateAddonList(data);
+      if (data.length !== 0) {
+      }
+    })
+  };
+
   componentDidMount() {
     this.windowSizeChange();
-    this.props.store!.setMyAddonList(myAddon.getAddonList())
+    this.checkUpdate()
   }
 
   render() {

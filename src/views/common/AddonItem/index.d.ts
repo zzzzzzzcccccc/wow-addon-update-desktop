@@ -2,7 +2,6 @@ import {IStore} from "../../../interface";
 
 export interface AddonItemProps {
   rowData: any;
-  renderSource?: 'my' | 'list';
   store?: IStore;
 }
 

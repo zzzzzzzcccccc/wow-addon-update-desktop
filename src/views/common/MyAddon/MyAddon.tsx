@@ -15,7 +15,7 @@ class MyAddon extends React.Component<MyAddonProps, {}> {
       <div className={styles.myAddonWrapper}>
         <section className={styles.myAddonWrapperInfo}>
           <div>
-            {myAddonList.map((item:any, index:number) => <AddonItem rowData={item} key={index + ''} renderSource="my" />)}
+            {myAddonList.map((item:any, index:number) => <AddonItem rowData={item} key={index + ''} />)}
           </div>
           <ScrollViewFooter />
         </section>

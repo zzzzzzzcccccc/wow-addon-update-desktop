@@ -4,7 +4,7 @@
 
 #### 应用下载
 
-* 1.0.3 [mac](https://pan.baidu.com/s/1x-K4c8EnifyeBjxtcq6ADQ) 提取码 btqk
+* 1.0.3 [win7/win10](https://pan.baidu.com/share/init?surl=z7LbeAnmxfdakNtgpLpDZA) 提取码 yuve  [mac](https://pan.baidu.com/s/1x-K4c8EnifyeBjxtcq6ADQ) 提取码 btqk
  1. 使用typescript重构客户端代码，优化了非常多体验性问题，本次更新需要重新设置一下插件根目录，不影响已安装的插件数据
  2. 优化了各种加载失败导致需要重试问题，现在增加体验重试都不会完全重启客户端了
  3. 后期会实现打开应用列出当前需要更新的插件,以及更新客户端风格
@@ -30,5 +30,6 @@
 
 ##### 工具截图
 
+![](./screenImg/3.png)
 ![](./screenImg/1.png)
 ![](./screenImg/2.png)

@@ -1,10 +1,13 @@
-const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu } = require('electron');
 const path = require('path');
 
 const argv = process.argv.slice(2);
 let mainWindow;
 
 function createWindow(width=1200, height=660) {
+  // electron 5.0.6 在window默认顶部左上角加菜单栏，用此方法可以去掉
+  Menu.setApplicationMenu(null);
+
   return new BrowserWindow({
     width, height,
     minWidth: 800,
@@ -25,6 +28,7 @@ function createController () {
   ipcMain.on('baseAddons', require('./electron-main/controller/BaseAddons')); // 插件列表
   ipcMain.on(`downAddon`, require('./electron-main/controller/DownAddons')); // 下载并且解压插件到指定目录
   ipcMain.on(`searchAddons`, require('./electron-main/controller/SearchAddons')); // 插件搜索
+  ipcMain.on('addonDetail', require('./electron-main/controller/AddonDetail')); // 插件详情
   ipcMain.on('reloadWindow', () => {
     if (!mainWindow) {
       return;
