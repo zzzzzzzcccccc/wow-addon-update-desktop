@@ -101,7 +101,12 @@ class Home extends React.Component<HomeProps, HomeState> {
                   setOptionDrawerVisible(true);
                   return;
                 };
-                checkUpdateMyAddon().then((data:any) => setUpdateAddonList(data));
+                checkUpdateMyAddon().then((data:any) => {
+                  if (data.length !== 0) {
+                    message.info(`你有${data.length}个插件需要更新`);
+                  }
+                  setUpdateAddonList(data)
+                });
                 setMyAddonDrawerVisible(true);
               }} />
             </Tooltip>
