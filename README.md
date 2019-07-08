@@ -4,7 +4,8 @@
 
 #### 应用下载
 
-* 1.0.4
+* 1.0.4 [mac](https://pan.baidu.com/s/1ZbD-nClRRYIV4uiarPKh8Q) 提取码 mr7m
+ 1. 现在打开应用会提醒你需要更新的插件了，我的插件现在也可以正常检测插件是否要更新了
 
 * 1.0.3 [win7/win10](https://pan.baidu.com/share/init?surl=z7LbeAnmxfdakNtgpLpDZA) 提取码 yuve  [mac](https://pan.baidu.com/s/1x-K4c8EnifyeBjxtcq6ADQ) 提取码 btqk
  1. 使用typescript重构客户端代码，优化了非常多体验性问题，本次更新需要重新设置一下插件根目录，不影响已安装的插件数据
