@@ -54,13 +54,15 @@ class Home extends React.Component<HomeProps, HomeState> {
 
   checkUpdate = (): void => { // 检查更新
     const cacheAddonList:Array<any> = myAddon.getAddonList();
-    const { setMyAddonList, checkUpdateMyAddon, setUpdateAddonList } = this.props.store!;
+    const { setMyAddonList, checkUpdateMyAddon, setUpdateAddonList, setMyAddonDrawerVisible } = this.props.store!;
 
     setMyAddonList(cacheAddonList);
 
     checkUpdateMyAddon().then(data => {
       setUpdateAddonList(data);
       if (data.length !== 0) {
+        message.info(`你有${data.length}个插件需要更新`);
+        setMyAddonDrawerVisible(true);
       }
     })
   };
@@ -72,7 +74,7 @@ class Home extends React.Component<HomeProps, HomeState> {
 
   render() {
     const { currentIndex, tabHeight } = this.state;
-    const { optionDrawerVisible, setOptionDrawerVisible, myAddonDrawerVisible, setMyAddonDrawerVisible, searchDrawerVisible, setSearchDrawerVisible } = this.props.store!;
+    const { optionDrawerVisible, setOptionDrawerVisible, myAddonDrawerVisible, setMyAddonDrawerVisible, searchDrawerVisible, setSearchDrawerVisible, checkUpdateMyAddon, setUpdateAddonList } = this.props.store!;
     return(
       <div className={styles.homeApp}>
         <section className={styles.tabWrapper}>
@@ -98,7 +100,8 @@ class Home extends React.Component<HomeProps, HomeState> {
                   message.warning(`请先选择wow插件根目录地址`);
                   setOptionDrawerVisible(true);
                   return;
-                }
+                };
+                checkUpdateMyAddon().then((data:any) => setUpdateAddonList(data));
                 setMyAddonDrawerVisible(true);
               }} />
             </Tooltip>
